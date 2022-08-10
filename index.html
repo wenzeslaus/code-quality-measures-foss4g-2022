@@ -194,7 +194,7 @@ and how this compares to my experience with new and small organizational reposit
         Nicklas Larsson, Vaclav Petras, Anna Petrasova, Carmen Tawalika, Loïc Bartoletti
     </p>
     <br>
-    <img src="img/psc_meeting_2021.png" class="stretch">
+    <img src="img/osgeo_codesprint_2018.jpg" class="stretch">
 
 </section>
 
@@ -218,42 +218,28 @@ and how this compares to my experience with new and small organizational reposit
 </section>
 
 
-<!--
-<section>
-    <h2>Addons Repository</h2>
-    <ul>
-        <li>Community-maintained tools <small>(addons aka extensions, plugins)</small></li>
-        <li>Separate from the main repository, but only one repository</li>
-        <li>A repository with the source code, not just a registry</li>
-        <li>Best of both worlds:
-            <ul>
-                <li>Broader community of contributors <small>including one-time contributors</small></li>
-                <li>Single repository maintained by the core community <small>similarly to the main repository</small></li>
-            </ul>
-        </li>
-    </ul>
-    <img src="img/grass_team.jpg" class="stretch">
-</section>
--->
-
-
 <section>
     <h2>Development Centered Around GitHub</h2>
     <ul>
         <li>Git</li>
         <li>PRs</li>
         <li>Issues</li>
-        <li>GitHub Actions</li>
+        <li>
+            GitHub Actions
+            <ul>
+                <li>A lot of free CI time since 2018.</li>
+            </ul>
+        </li>
     </ul>
     <br>
-    <img src="img/octocat.png" class="stretch">
+    <img src="img/laptops.jpg" class="stretch">
 </section>
 
 
 <section>
     <h2>Python Tools Used in GRASS GIS</h2>
     <ul>
-        <li>Formatted by Black.</li>
+        <li>Python code formatted by Black.</li>
         <li>Checked against Flake8.</li>
         <li>Some code checked with Pylint.</li>
     </ul>
@@ -272,7 +258,7 @@ and how this compares to my experience with new and small organizational reposit
             <small>Checks mostly C++ language variations.</small>
         </li>
     </ul>
-    <img src="img/code_in_vscodium.png" class="stretch">
+    <img src="img/code_in_qtcreator.png" class="stretch">
 </section>
 
 
@@ -289,7 +275,7 @@ and how this compares to my experience with new and small organizational reposit
             <small>Wanted: CSpell (possibly through MegaLinter)</small>
         </li>
     </ul>
-    <img src="img/code_in_vscodium.png" class="stretch">
+    <img src="img/markdown_in_gedit.png" class="stretch">
 </section>
 
 
@@ -335,7 +321,7 @@ GCC -Wall -Wextra
 present: unused, sign-compare, shadow, implicit-fallthrough, uninitialized, builtin-declaration-mismatch, type-limits
 fixed: dangling-else, discarded-qualifiers, format, logical-op, parentheses, pointers, restrict, tautological-compare, uninitialized
     -->
-
+    <img src="img/grass_logo_development.png" alt="GRASS GIS logo" class="stretch">
 </section>
 
 
@@ -383,7 +369,7 @@ fixed: dangling-else, discarded-qualifiers, format, logical-op, parentheses, poi
 
 
 <section>
-    <h2>Introduction to Linting Tools</h2>
+    <h2>Two Linting Tool Examples</h2>
 </section>
 
 
@@ -410,6 +396,488 @@ fixed: dangling-else, discarded-qualifiers, format, logical-op, parentheses, poi
     <pre><code data-trim class="no-highlight">
         black --check .
     </code></pre>
+</section>
+
+
+<section>
+    <h2>C &amp; C++: valgrind</h2>
+
+    <ul>
+        <li>Memcheck is the default tool</li>
+        <li>Check memory usage of a program</li>
+        <li>Detects segmentation faults, leaked memory, &hellip;</li>
+        <li>Runs the program</li>
+    </ul>
+
+    <p>
+
+    In a GRASS session:
+
+    <pre><code data-trim class="no-highlight">
+        valgrind --leak-check=yes r.stats.quantile base=zipcodes cover=elevation quantiles=3 -p
+        valgrind --track-origins=yes --redzone-size=2048 d.legend soil_loss
+    </code></pre>
+
+    Using <code>--exec</code>:
+
+    <pre><code data-trim class="no-highlight">
+        grass --tmp-mapset ~/data/nc_spm/ --exec valgrind r.stats.quantile base=zipcodes cover=elevation quantiles=3 -p
+    </code></pre>
+</section>
+
+
+<section>
+    <h2>Benefits</h2>
+</section>
+
+
+<section>
+    <h2>Automated Formatting Is Easier</h2>
+
+    <ul>
+        <li>
+            Manual formatting according to a standard is hard or impossible,
+            while automatic formatting is easy.
+            <ul>
+                <!--<li>Using a command, editor configuration, GitHub Action, &hellip;</li>-->
+                <li>But: Should really be done using the tool.</li>
+                <!--<li>But: Auto-formatting in PRs confuses contributors</li>-->
+            </ul>
+        </li>
+        <li>
+            No need to discuss style with every change.
+            <ul>
+                <li>...or at least formatting is a separate discussion.</li>
+                <!--<li>&hellip;after the configuration has been created</li>-->
+                <!--<li>Separates the formatting discussion from specific code contributions</li>-->
+            </ul>
+        </li>
+    </ul>
+    <br>
+    <img src="img/prague_isprs_sprint_cafe_discussion.jpg" class="stretch">
+    <br>
+    <small style="font-size: 50%;">Another endless discussion about code formatting style</small>
+</section>
+
+
+<section>
+    <h2>Code Checks Ensure Consistent Quality</h2>
+
+    <ul>
+        <li>
+            Common code quality level, defined, enforced.
+            <ul>
+                <li>Simple rule: <em>If the tools flags it, it needs to be fixed.</em></li>
+            </ul>
+        </li>
+        <li>
+            No need to check basic coding issues in PR reviews.
+            <ul>
+                <li>Reviewers focus on functionality and project-specific issues.</li>
+                <li>Reviews are hard and cost time, make them simpler!</li>
+            </ul>
+        </li>
+    </ul>
+    <img src="img/sprint_prague_2019.jpg" class="stretch">
+    <br>
+    <small style="font-size: 50%;">Czechs happy after reviewing their code</small>
+</section>
+
+
+<section>
+    <h2>Checks Run On All Code</h2>
+    <ul>
+        <li>Manual testing is always incomplete.</li>
+        <li>Tests need to be written for specific parts of code.</li>
+        <li>
+            Linting has 100% coverage.
+            <ul>
+                <li>if configured that way</li>
+                <li>often with default settings</li>
+                <li>includes old and forgotten helper scripts</li>
+            </ul>
+        </li>
+    </ul>
+    <br>
+    <img src="img/sprint_boston.jpg" class="stretch">
+    <br>
+    <small style="font-size: 50%;">Czechs looking into their code <small>(photo credit: Jody Garnett)</small></small>
+</section>
+
+
+<section>
+    <h2>Even Unrelated Warnings Expose Bugs</h2>
+
+    Code:
+
+    <pre><code data-trim>
+        gs.fatal(_("File does not exist: {name}".format(name=filename)))
+    </code></pre>
+
+    Pylint reports:
+
+    <pre><code data-trim class="no-highlight">
+        Formatting a regular string which could be a f-string (consider-using-f-string)
+    </code></pre>
+
+    <p>
+        Analysis:
+        <ul>
+            <li>
+                Looks like useless warning about not using the latest f-string syntax.
+            </li>
+            <li>
+                Draws attention to a line where a translate function
+                named <code>_</code> (underscore) is used.
+            </li>
+            <li>
+                The <em>format</em> function is called on the string,
+                but it should be called on the result of the translation function.
+            </li>
+        </ul>
+    </p>
+
+    Fixed code:
+
+    <pre><code data-trim class="python language-python">
+        gs.fatal(_("File does not exist: {name}").format(name=filename))
+    </code></pre>
+</section>
+
+
+<section>
+    <h2>Introducing Linters to a Project</h2>
+</section>
+
+
+<section>
+    <h2>Start Early</h2>
+    <p>
+        It is much easier start right at the beginning, than later on.
+    </p>
+    <p>
+        Even for small projects!
+    </p>
+    <p><small>It was hard to get started in GRASS GIS, but it is hard even for projects which are couple years old.</small></p>
+
+    <p style="font-size: 500%;">Now!</p>
+
+    <p>&hellip; but better late than never and certainly possible.</p>
+
+    <aside class="notes">
+        Why they just didn't use GitHub Actions from the beginning? &hellip;or something like that?
+        Initial release of CVS 1990, of Subversion (SVN) 2000, of Git 2005, of GitHub 2008, of GitHub Actions 2018 of GRASS GIS 1983.
+    </aside>
+</section>
+
+
+
+<section>
+    <h2>Enforce the Standards in CI</h2>
+
+    <ul>
+        <li>Don't rely on contributors running the checks locally.</li>
+        <li>With many checks, you can't even ask for that.</li>
+        <li>But: Have a way to run the checks locally.</li>
+    </ul>
+    <br>
+    <img src="img/prague_isprs_sprint_box.jpg" class="stretch">
+    <br>
+    <small style="font-size: 50%;">Coding in a protective box</small>
+</section>
+
+
+<section>
+    <h2>Consider Warnings To Be Errors</h2>
+
+    <ul>
+        <li>Bad practice warning is useless if it is not enforced.</li>
+        <li>Some tools warn, but don't report that as a failure.</li>
+        <li>Plain warnings are for good for transitional period.</li>
+    </ul>
+
+    <p><small>
+        Example for GCC and Clang:
+    </small></p>
+
+    <pre><code data-trim class="no-highlight">
+        gcc -Wall -Werror ...
+    </code></pre>
+
+    <img src="img/prague_isprs_sprint_cafe.jpg" class="stretch">
+    <br>
+    <small style="font-size: 50%;">Minimize errors from spilled beer</small>
+</section>
+
+
+<section>
+    <h2>Tips and Tricks</h2>
+</section>
+
+
+<section>
+    <h2>Be Specific in Excluding and Ignoring</h2>
+    Exclude only specific files or specific checks for specific files.
+
+    <p><small>
+        Flake8 can ignore warnings per file or directory:
+    </small></p>
+
+    <pre><code data-trim class="no-highlight">
+        per-file-ignores =
+            lib/init/grass.py: E501, E722, F821, F841, W605
+            gui/wxpython/vnet/*: F841, E501
+    </code></pre>
+
+    <p><small>
+        Warnings can be easily enabled again later from a single place.
+    </small></p>
+
+    <img src="img/meetup_fishbowl.jpg" class="stretch">
+    <br>
+    <small style="font-size: 50%;">Be transparent in what is ignored</small>
+</section>
+
+
+<section>
+    <h2>Minimize Where Warning is Ignored</h2>
+    Disable only a specific warning for a specific directory, file, or line.
+
+    <p>
+    Yes &mdash; only one line:
+
+    <pre><code data-trim class="python language-python">
+        apple._refresh_core()  # pylint: disable=protected-access
+    </code></pre>
+
+    No &mdash; everything after the line:
+
+    <pre><code data-trim class="python language-python">
+        # pylint: disable=protected-access
+        apple._refresh_core()
+    </code></pre>
+
+    Also: Line ignores and in-file ignores are best for ignores which are there to stay, i.e., the code just has to be that way or the warning does not apply
+    (e.g., access to private or protected methods in tests).
+</section>
+
+
+<section>
+    <h2>Refine Ignores</h2>
+
+    Continue improving your configuration and make it specific to your project.
+
+    <p>
+    Code:
+
+    <pre><code data-trim class="python language-python">
+        gs.fatal(_("File does not exist: {name}").format(name=filename))
+    </code></pre>
+
+    Original error from Pylint:
+
+    <pre><code data-trim class="no-highlight">
+        Undefined variable '_' (undefined-variable)
+    </code></pre>
+
+    Quick fix for Pylint by disabling the reported message:
+
+    <pre><code data-trim class="no-highlight">
+        disable=undefined-variable
+    </code></pre>
+
+    Full fix for Pylint by telling it about our code:
+
+    <pre><code data-trim class="no-highlight">
+        additional-builtins=_
+    </code></pre>
+</section>
+
+
+<section>
+    <h2>Explain Why You Ignore Warnings</h2>
+    For all ignores in files and others which are meant to be permanent,
+    include explanation for why it is that way.
+
+    <p>
+        <small>
+            Example: Pylint disable in a theoretical GUI application:
+        </small>
+
+    <pre><code data-trim class="python language-python">
+        # Always show an error message window even when the code is broken.
+        # This avoids tracebacks appearing without context.
+        except Exception as error:  # pylint: disable=broad-except
+            show_error_window(error)
+    </code></pre>
+
+    Later on, it will be clear, if the warning should be enabled or not.
+
+    <br>
+    <img src="img/prague_isprs_sprint_ctu_box_closeup.jpg" class="stretch">
+    <br>
+    <small style="font-size: 50%;">Developers thinking hard what the code means</small>
+</section>
+
+
+<section>
+    <h2>Contribute Time</h2>
+
+    <ul>
+        <li>
+            Fix the code.
+            <ul>
+                <li>Great learning experience: small and independent issues.</li>
+                <!-- with both general and GRASS-specific take-home messages-->
+                <li>
+                    Submit a good PR:
+                    <ul>
+                        <li>Separate fixes into PRs for easier review.</li>
+                        <li>Group fixes into PRs (by error id or component).</li> <!--to avoid many similar PRs-->
+                        <!--<li>Don't assume all errors just need to be ignored (leave it as is if needed).</li>-->
+                        <li>Remove ignores from configuration.</li>
+                    </ul>
+                </li>
+                <li>Join <em>Hour with the developer</em> at the Community Sprint.</li>
+            </ul>
+        </li>
+        <li>
+            Do another task to free someone's time for the coding.
+        </li>
+    </ul>
+
+    <br>
+    <img src="img/sprint_boston_2017_tshirts.jpg" class="stretch">
+    <br>
+    <small style="font-size: 50%;">Feeling great after contributing to GRASS GIS</small>
+</section>
+
+
+<section>
+<h2>Contribute Money</h2>
+
+<ul>
+    <li>
+        Pay for fixing the code.
+        <ul>
+            <li><a href="https://opencollective.com/grass">opencollective.com/grass</a> &rarr; GRASS GIS Mini Grants, &hellip;</li>
+            <li>Pay a developer or company (we are here, talk to us).</li>
+            <li>Ask your employer to donate your or your colleague's time.</li>
+        </ul>
+    </li>
+</ul>
+
+<p style="font-size: 500%;">$</p>
+</section>
+
+
+<section>
+    <img src="img/grass_gis.svg" alt="GRASS GIS logo" class="stretch">
+    <p>
+        <a href="https://github.com/OSGeo/grass/"><small>Contribute:</small> github.com/OSGeo/grass</a>
+    </p>
+    <p>
+        <small>Get support from NC State University:</small> vpetras&#64;ncsu&#46;edu
+    </p>
+    <p>
+        <a href="https://twitter.com/vaclavpetras/"><small>Twitter:</small> vaclavpetras</a>
+        <br>
+        <a href="https://www.linkedin.com/in/vaclav-petras-a24a1b114/"><small>LinkedIn:</small> Vaclav Petras</a>
+    </p>
+    <p>
+        <a href="https://wenzeslaus.github.io/code-quality-measures-foss4g-2022/">wenzeslaus.github.io/code-quality-measures-foss4g-2022</a>
+</section>
+
+<section>
+    <h2>Bonus Content</h2>
+</section>
+
+
+<section>
+    <h2>Changes in Mindset</h2>
+</section>
+
+
+<section>
+    <h2>If It Ain't Broke, Don't Fix It, Or?</h2>
+
+    <p>
+    Why to Change Code which Works?
+    </p>
+
+    <p>
+    With languages, dependencies, operating systems changing fasts,
+    even stable code needs modifications.
+    So, you may as well update the code to latest standard because:
+    </p>
+
+    <ul>
+        <li>Non-compliant code broken.</li>
+    </ul>
+
+    <p>
+    Even if you don't care about best practices:
+    <p>
+
+    <ul>
+        <li>Hard to maintain code is broken.</li>
+        <li>Hard to change code is broken.</li>
+    </ul>
+
+    <p>
+    When you can apply automatic linters, maintaining and changing the code is simpler
+    because there is more checks in place.
+    </p>
+</section>
+
+
+<section>
+    <h2>Correctness Over Consistency</h2>
+    <p>
+        Should I changing surrounding code only because it is ugly?
+    </p>
+    <p>
+        Don't add bad code because the surrounding code is bad.
+    </p>
+    <p>
+        Leave the code in a better condition than when you found it.
+    </p>
+</section>
+
+
+<section>
+    <h2>Best Practices Change</h2>
+    Best practices are a moving target.
+    <ul>
+        <li>Black formatting may change with new version of Black (each year).</li>
+        <li>What is best formatting changes as new issues or use cases are discovered.</li>
+        <li>Formatting may change with new syntax available.</li>
+        <li>Best practices may change with new libraries, syntax, or security concerns.</li>
+    </ul>
+    <p>
+        So, the code will change (and that's fine).
+    </p>
+</section>
+
+
+<section>
+    <h2>Please, test!</h2>
+    <quote>
+        <em>The day when all manual testing will be obsolete because of some tool is very far away.</em>
+        <br>
+        <div style="text-align: right; padding-top: 1ex;">
+            &mdash; <a href="https://cppcheck.sourceforge.io">Cppcheck documentation</a>
+        </div>
+    </quote>
+
+    <p>
+        Linters work together with, not instead of manual testing and written tests.
+    </p>
+</section>
+
+
+<section>
+    <h2>More Linting Tools</h2>
 </section>
 
 
@@ -556,33 +1024,6 @@ fixed: dangling-else, discarded-qualifiers, format, logical-op, parentheses, poi
 
 
 <section>
-    <h2>C &amp; C++: valgrind</h2>
-
-    <ul>
-        <li>Memcheck is the default tool</li>
-        <li>Check memory usage of a program</li>
-        <li>Detects segmentation faults, leaked memory, &hellip;</li>
-        <li>Runs the program</li>
-    </ul>
-
-    <p>
-
-    In a GRASS session:
-
-    <pre><code data-trim class="no-highlight">
-        valgrind --leak-check=yes r.stats.quantile base=zipcodes cover=elevation quantiles=3 -p
-        valgrind --track-origins=yes --redzone-size=2048 d.legend soil_loss
-    </code></pre>
-
-    Using <code>--exec</code>:
-
-    <pre><code data-trim class="no-highlight">
-        grass --tmp-mapset ~/data/nc_spm/ --exec valgrind r.stats.quantile base=zipcodes cover=elevation quantiles=3 -p
-    </code></pre>
-</section>
-
-
-<section>
     <h2>C &amp; C++: Cppcheck</h2>
 
     <ul>
@@ -667,197 +1108,7 @@ fixed: dangling-else, discarded-qualifiers, format, logical-op, parentheses, poi
 
 
 <section>
-    <h2>Benefits</h2>
-</section>
-
-<section>
-    <h2>Automated Formatting Is Easier</h2>
-
-    <ul>
-        <li class="fragment">
-            Manual formatting according to a standard is hard or impossible
-        </li>
-        <li class="fragment">
-            Formatting happens automatically
-            <ul>
-                <li>Using a command, editor configuration, GitHub Action, &hellip;</li>
-                <li>But: Emphasize that it should be done using the tool</li>
-                <li>But: Auto-formatting in PRs confuses contributors</li>
-            </ul>
-        </li>
-        <li class="fragment">
-            &rarr; No need for discussion of project or personal style with every change
-            <ul>
-                <li>&hellip;after the configuration has been created</li>
-                <li>Separates the formatting discussion from specific code contributions</li>
-            </ul>
-        </li>
-    </ul>
-</section>
-
-
-<section>
-    <h2>Code Checks Ensure Consistent Quality</h2>
-
-    <ul>
-        <li>
-            Common code quality level, defined, enforced
-            <ul>
-                <li>Simple rule: <em>If the tools flags it, it needs to be fixed.</em></li>
-            </ul>
-        </li>
-        <li>
-            &rarr; No need to check and discuss basic coding issues in PR reviews
-            <ul>
-                <li>PR reviewers can focus on functionality and project-specific issues</li>
-                <li>Reviews are hard and cost time, make them simpler!</li>
-            </ul>
-        </li>
-    </ul>
-</section>
-
-
-<section>
-    <h2>Checks Run On All Code</h2>
-    <ul>
-        <li>Manual testing is always incomplete.</li>
-        <li>Tests need to be written for specific parts of code.</li>
-        <li>
-            Linting has 100% coverage.
-            <ul>
-                <li>if configured that way</li>
-                <li>often with default settings</li>
-                <li>includes old and forgotten helper scripts</li>
-            </ul>
-        </li>
-    </ul>
-</section>
-
-
-<section>
-    <h2>Clarified Python Version Support</h2>
-
-    <ul>
-        <li>CI or the linter tools have Python version configuration.</li>
-        <li>This helps to clarify supported Python versions.</li>
-    </ul>
-
-    <p>
-    <em>actions/setup-python</em> in GitHub Actions:
-
-    <pre><code data-trim class="yaml language-yaml">
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: "3.10"
-    </code></pre>
-
-    Pylint minimal supported Python version:
-
-    <pre><code data-trim class="no-highlight">
-        pylint --py-version=3.7 ...
-    </code></pre>
-
-    <p>
-    Black target Python versions:
-
-    <pre><code data-trim>
-        [tool.black]
-        target-version = ['py37', 'py38', 'py39', 'py310']
-    </code></pre>
-</section>
-
-
-<section>
-    <h2>Even Unrelated Warnings Expose Bugs</h2>
-
-    Code:
-
-    <pre><code data-trim>
-        gs.fatal(_("File does not exist: {name}".format(name=filename)))
-    </code></pre>
-
-    Pylint reports:
-
-    <pre><code data-trim class="no-highlight">
-        Formatting a regular string which could be a f-string (consider-using-f-string)
-    </code></pre>
-
-    <p>
-        Analysis:
-        <ul>
-            <li>
-                Looks like useless warning about not using the latest f-string syntax.
-            </li>
-            <li>
-                Draws attention to a line where a translate function
-                named <code>_</code> (underscore) is used.
-            </li>
-            <li>
-                The <em>format</em> function is called on the string,
-                but it should be called on the result of the translation function.
-            </li>
-        </ul>
-    </p>
-
-    Fixed code:
-
-    <pre><code data-trim class="python language-python">
-        gs.fatal(_("File does not exist: {name}").format(name=filename))
-    </code></pre>
-</section>
-
-
-<section>
-    <h2>Introducing Linters to a Project</h2>
-</section>
-
-
-<section>
-    <h2>Start Early</h2>
-    <p>
-        It is much easier start right at the beginning, than later on.
-    </p>
-    <p>
-        Even for small projects!
-    </p>
-    <p><small>It was hard to get started in GRASS GIS, but it is hard even for projects which are couple years old.</small></p>
-
-    <p style="font-size: 500%;">Now!</p>
-
-    <aside class="notes">
-        Why they just didn't use GitHub Actions from the beginning? &hellip;or something like that?
-        Initial release of CVS 1990, of Subversion (SVN) 2000, of Git 2005, of GitHub 2008, of GitHub Actions 2018 of GRASS GIS 1983.
-    </aside>
-</section>
-
-
-
-<section>
-    <h2>Enforce the Standards in CI</h2>
-
-    <ul>
-        <li>Don't rely on contributors running the checks locally.</li>
-        <li>With many checks, it is not even reasonable to ask contributors to do that.</li>
-        <li>But: Have a way to run the checks locally.</li>
-    </ul>
-</section>
-
-
-<section>
-    <h2>Consider Warnings To Be Errors</h2>
-
-    <ul>
-        <li>Warning about a bad practice is useless if it is not enforced.</li>
-        <li>Some tools provide warnings, but don't report them as failures.</li>
-        <li>Plain warnings are for good for transitional period.</li>
-    </ul>
-
-    GCC and Clang:
-
-    <pre><code data-trim class="no-highlight">
-        gcc -Wall -Werror ...
-    </code></pre>
+    <h2>More Tips and Tricks</h2>
 </section>
 
 
@@ -916,7 +1167,6 @@ fixed: dangling-else, discarded-qualifiers, format, logical-op, parentheses, poi
 </section>
 
 
-<!--
 <section>
     <h2>Use Separate Runs If Needed</h2>
     Run on different parts of source code in complete isolation.
@@ -947,121 +1197,6 @@ fixed: dangling-else, discarded-qualifiers, format, logical-op, parentheses, poi
     </code></pre>
     Works well as a temporary solution, but hard to navigate and maintain long term.
 </section>
--->
-
-
-<!--
-<section>
-    <h2></h2>
-
-    <p>
-        Use Simpler Language?...if you can.
-    </p>
-
-    <p>
-        Python is easier to get right and has easy to use tooling than C and C++.
-    </p>
-
-    <p>But: C compilation checks. C++ type checking.</p>
-</section>
--->
-
-
-<section>
-    <h2>Tips and Tricks</h2>
-</section>
-
-
-<section>
-    <h2>Be Specific in Excluding and Ignoring</h2>
-    Exclude only specific files, skip specific checks only for specific files.
-
-    <p>
-    Flake8 can ignore warnings per file or directory:
-
-    <pre><code data-trim class="no-highlight">
-        [flake8]
-        per-file-ignores =
-            lib/init/grass.py: E501, E722, F821, F841, W605
-            gui/wxpython/vnet/*: F841, E501
-    </code></pre>
-
-    There is only one place where ignoring is controlled, so warnings can be easily enabled again later.
-</section>
-
-
-<section>
-    <h2>Minimize Where Warning is Ignored</h2>
-    Disable only a specific warning for a specific directory, file, or line.
-
-    <p>
-    Yes &mdash; only one line:
-
-    <pre><code data-trim class="python language-python">
-        apple._refresh_core()  # pylint: disable=protected-access
-    </code></pre>
-
-    No &mdash; everything after the line:
-
-    <pre><code data-trim class="python language-python">
-        # pylint: disable=protected-access
-        apple._refresh_core()
-    </code></pre>
-
-    Also: Line ignores and in-file ignores are best for ignores which are there to stay, i.e., the code just has to be that way or the warning does not apply
-    (e.g., access to private or protected methods in tests).
-</section>
-
-
-<section>
-    <h2>Refine Ignores</h2>
-
-    Continue improving your configuration and make it specific to your project.
-
-    <p>
-    Code:
-
-    <pre><code data-trim class="python language-python">
-        gs.fatal(_("File does not exist: {name}").format(name=filename))
-    </code></pre>
-
-    Original error from Pylint:
-
-    <pre><code data-trim class="no-highlight">
-        Undefined variable '_' (undefined-variable)
-    </code></pre>
-
-    Quick fix for Pylint by disabling the reported message:
-
-    <pre><code data-trim class="no-highlight">
-        disable=undefined-variable
-    </code></pre>
-
-    Full fix for Pylint by telling it about our code:
-
-    <pre><code data-trim class="no-highlight">
-        additional-builtins=_
-    </code></pre>
-</section>
-
-
-<section>
-    <h2>Explain Why You Ignore Warnings</h2>
-    For all ignores in files and others which are meant to be permanent,
-    include explanation for why it is that way.
-
-    <p>
-    Explanation for a Pylint disable comment in context of (theoretical) a GUI application:
-
-    <pre><code data-trim class="python language-python">
-        # Always show an error message window even when the code is broken.
-        # This avoids tracebacks appearing without context.
-        except Exception as error:  # pylint: disable=broad-except
-            show_error_window(error)
-    </code></pre>
-
-    Later on, it will be clear, if the warning should be enabled or not.
-</section>
 
 
 <section>
@@ -1087,148 +1222,79 @@ fixed: dangling-else, discarded-qualifiers, format, logical-op, parentheses, poi
 
 
 <section>
-    <h2>Changes in Mindset</h2>
-</section>
-
-
-<section>
-    <h2>If It Ain't Broke, Don't Fix It, Or?</h2>
-
-    <p>
-    Why to Change Code which Works?
-    </p>
-
-    <p>
-    With languages, dependencies, operating systems changing fasts,
-    even stable code needs modifications.
-    So, you may as well update the code to latest standard because:
-    </p>
+    <h2>Specify Versions</h2>
+    <!--<h2>Clarify Python Version Support</h2>-->
 
     <ul>
-        <li>Non-compliant code broken.</li>
+        <li>CI or the linter tools have Python version configuration.</li>
+        <li>This helps to clarify supported Python versions.</li>
     </ul>
 
     <p>
-    Even if you don't care about best practices:
-    <p>
+    <em>actions/setup-python</em> in GitHub Actions:
 
+    <pre><code data-trim class="yaml language-yaml">
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: "3.10"
+    </code></pre>
+
+    Pylint minimal supported Python version:
+
+    <pre><code data-trim class="no-highlight">
+        pylint --py-version=3.7 ...
+    </code></pre>
+
+    <p>
+    Black target Python versions:
+
+    <pre><code data-trim>
+        [tool.black]
+        target-version = ['py37', 'py38', 'py39', 'py310']
+    </code></pre>
+</section>
+
+
+<section>
+    <h2>Language Choice</h2>
+
+    <p>
+        Use simpler Language?...if you can.
+    </p>
+
+    <p>
+        Python is easier to get right and has easy to use tooling than C and C++.
+    </p>
+
+    <p>
+        But: C compilation-time checks. Strong C++ type checking.
+    </p>
+</section>
+
+
+<section>
+    <h2>More about GRASS GIS</h2>
+</section>
+
+
+<section>
+    <h2>Addons Repository</h2>
     <ul>
-        <li>Hard to maintain code is broken.</li>
-        <li>Hard to change code is broken.</li>
-    </ul>
-
-    <p>
-    When you can apply automatic linters, maintaining and changing the code is simpler
-    because there is more checks in place.
-    </p>
-</section>
-
-
-<section>
-    <h2>Correctness Over Consistency</h2>
-    <p>
-        Should I changing surrounding code only because it is ugly?
-    </p>
-    <p>
-        Don't add bad code because the surrounding code is bad.
-    </p>
-    <p>
-        Leave the code in a better condition than when you found it.
-    </p>
-</section>
-
-
-<section>
-    <h2>Best Practices Change</h2>
-    Best practices are a moving target.
-    <ul>
-        <li>Black formatting may change with new version of Black (each year).</li>
-        <li>What is best formatting changes as new issues or use cases are discovered.</li>
-        <li>Formatting may change with new syntax available.</li>
-        <li>Best practices may change with new libraries, syntax, or security concerns.</li>
-    </ul>
-    <p>
-        So, the code will change (and that's fine).
-    </p>
-</section>
-
-
-<section>
-    <h2>Please, test!</h2>
-    <quote>
-        <em>The day when all manual testing will be obsolete because of some tool is very far away.</em>
-        <br>
-        <div style="text-align: right; padding-top: 1ex;">
-            &mdash; <a href="https://cppcheck.sourceforge.io">Cppcheck documentation</a>
-        </div>
-    </quote>
-
-    <p>
-        Linters work together with, not instead of manual testing and written tests.
-    </p>
-</section>
-
-
-<section>
-    <h2>Contribute Time</h2>
-
-    <ul>
-        <li>
-            Fix the code.
+        <li>Community-maintained tools <small>(addons aka extensions, plugins)</small></li>
+        <li>Separate from the main repository, but only one repository</li>
+        <li>A repository with the source code, not just a registry</li>
+        <li>Best of both worlds:
             <ul>
-                <li>Great learning experience: Small, independent issues with both general and GRASS-specific take-home messages.</li>
-                <li>
-                    Submit a good PR:
-                    <ul>
-                        <li>Separate fixes into PRs for easier review.</li>
-                        <li>Group fixes into PRs (by error id, file, or component) to avoid many similar PRs.</li>
-                        <li>Don't assume all errors just need to be ignored (leave it as is if needed).</li>
-                        <li>Remove ignores from configuration</li>
-                    </ul>
-                </li>
-                <li>Join the the <em>Hour with the developer</em> at FOSS4G 2022 Community Sprint.</li>
+                <li>Broader community of contributors <small>including one-time contributors</small></li>
+                <li>Single repository maintained by the core community <small>similarly to the main repository</small></li>
             </ul>
         </li>
     </ul>
-
-    <p style="font-size: 200%;">&#9716;</p>
+    <img src="img/grass_team.jpg" class="stretch">
 </section>
 
 
-<section>
-<h2>Contribute Money</h2>
-
-<ul>
-    <li>
-        Pay for fixing the code.
-        <ul>
-            <li><a href="https://opencollective.com/grass">opencollective.com/grass</a> &rarr; GRASS GIS Mini Grants, &hellip;</li>
-            <li>Pay a developer or company (we are here, talk to us).</li>
-            <li>Ask your employer to donate your or your colleague's time.</li>
-        </ul>
-    </li>
-</ul>
-
-<p style="font-size: 500%;">$</p>
-</section>
-
-
-<section>
-    <img src="img/grass_gis.svg" alt="GRASS GIS logo" class="stretch">
-    <p>
-        <a href="https://github.com/OSGeo/grass/"><small>Contribute fixes:</small> github.com/OSGeo/grass</a>
-    </p>
-    <p>
-        <small>Get support from NC State University:</small> vpetras&#64;ncsu&#46;edu
-    </p>
-    <p>
-        <a href="https://twitter.com/vaclavpetras/"><small>Twitter:</small> vaclavpetras</a>
-        <br>
-        <a href="https://www.linkedin.com/in/vaclav-petras-a24a1b114/"><small>LinkedIn:</small> Vaclav Petras</a>
-    </p>
-    <p>
-        <a href="https://wenzeslaus.github.io/code-quality-measures-foss4g-2022/">wenzeslaus.github.io/code-quality-measures-foss4g-2022</a>
-</section>
 
             </div>
         </div>
