@@ -158,7 +158,7 @@ and how this compares to my experience with new and small organizational reposit
         <a href="http://www.ncsu.edu/" title="North Carolina State University">North Carolina State University</a>
     </p>
     <img src="img/grass_gis.svg" class="stretch" alt="GRASS GIS logo">
-    <p><small>August 25, 2022</small></p>
+    <p><small>FOSS4G Firenze, August 25, 2022</small></p>
     <p>
         <a href="https://wenzeslaus.github.io/code-quality-measures-foss4g-2022/">wenzeslaus.github.io/code-quality-measures-foss4g-2022</a>
 </section>
@@ -184,16 +184,9 @@ and how this compares to my experience with new and small organizational reposit
 <section>
     <h2>Credit to the Community</h2>
     <p>
-        <em>
-            Credit for improvements to GRASS GIS goes to the whole community, not just this talk's author.
-        </em>
-    </p>
-    <p>
         Large contributions by:
-        <br>
-        Nicklas Larsson, Vaclav Petras, Anna Petrasova, Carmen Tawalika, Loïc Bartoletti
+        Nicklas Larsson, Anna Petrasova, Carmen Tawalika, Loïc Bartoletti, Vaclav Petras
     </p>
-    <br>
     <img src="img/osgeo_codesprint_2018.jpg" class="stretch">
 
 </section>
@@ -225,10 +218,7 @@ and how this compares to my experience with new and small organizational reposit
         <li>PRs</li>
         <li>Issues</li>
         <li>
-            GitHub Actions
-            <ul>
-                <li>A lot of free CI time since 2018.</li>
-            </ul>
+            GitHub Actions <small>(A lot of free CI time since 2018.)</small>
         </li>
     </ul>
     <br>
@@ -593,7 +583,7 @@ fixed: dangling-else, discarded-qualifiers, format, logical-op, parentheses, poi
     <ul>
         <li>Bad practice warning is useless if it is not enforced.</li>
         <li>Some tools warn, but don't report that as a failure.</li>
-        <li>Plain warnings are for good for transitional period.</li>
+        <!--<li>Plain warnings are for good for transitional period.</li>-->
     </ul>
 
     <p><small>
@@ -606,7 +596,7 @@ fixed: dangling-else, discarded-qualifiers, format, logical-op, parentheses, poi
 
     <img src="img/prague_isprs_sprint_cafe.jpg" class="stretch">
     <br>
-    <small style="font-size: 50%;">Minimize errors from spilled beer</small>
+    <small style="font-size: 50%;">Minimize errors from spilled beer. You have been warned.</small>
 </section>
 
 
@@ -696,9 +686,9 @@ fixed: dangling-else, discarded-qualifiers, format, logical-op, parentheses, poi
 
 <section>
     <h2>Explain Why You Ignore Warnings</h2>
-    For all ignores in files and others which are meant to be permanent,
-    include explanation for why it is that way.
-
+    <p>
+        For permanent ignores, include explanation.
+    </p>
     <p>
         <small>
             Example: Pylint disable in a theoretical GUI application:
@@ -711,12 +701,16 @@ fixed: dangling-else, discarded-qualifiers, format, logical-op, parentheses, poi
             show_error_window(error)
     </code></pre>
 
-    Later on, it will be clear, if the warning should be enabled or not.
-
-    <br>
     <img src="img/prague_isprs_sprint_ctu_box_closeup.jpg" class="stretch">
     <br>
     <small style="font-size: 50%;">Developers thinking hard what the code means</small>
+
+    <aside class="notes">
+        For all ignores in files and others which are meant to be permanent,
+        include explanation for why it is that way.
+        <p>
+        Later on, it will be clear, if the warning should be enabled or not.
+    </aside>
 </section>
 
 
@@ -732,8 +726,10 @@ fixed: dangling-else, discarded-qualifiers, format, logical-op, parentheses, poi
                 <li>
                     Submit a good PR:
                     <ul>
+                        <li>Separate unrelated fixes into multiple PRs for easier review.</li>
+                        <!--
                         <li>Separate fixes into PRs for easier review.</li>
-                        <li>Group fixes into PRs (by error id or component).</li> <!--to avoid many similar PRs-->
+                        <li>Group fixes into PRs (by error id or component).</li>--> <!--to avoid many similar PRs-->
                         <!--<li>Don't assume all errors just need to be ignored (leave it as is if needed).</li>-->
                         <li>Remove ignores from configuration.</li>
                     </ul>
@@ -742,7 +738,7 @@ fixed: dangling-else, discarded-qualifiers, format, logical-op, parentheses, poi
             </ul>
         </li>
         <li>
-            Do another task to free someone's time for the coding.
+            Do another task to free someone's time for coding.
         </li>
     </ul>
 
